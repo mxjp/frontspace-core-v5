@@ -1,0 +1,12 @@
+{
+	"name": "frontspace",
+	"main": "css/default.css",
+	"version": "2.1.0",
+	"scripts": {
+		"compile": "node compile --style=compressed",
+		"start": "node compile --watch"
+	},
+	"devDependencies": {
+		"sass": "^1.26.5"
+	}
+}

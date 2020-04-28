@@ -1,0 +1,203 @@
+@use "utility" as *;
+
+@function get-margin($side) {
+	@return calc(var(--margin-#{$side}) + var(--box-offset-#{$side}));
+}
+
+@function get-padding($side) {
+	@return calc(var(--padding-#{$side}) + var(--border-width-#{$side}));
+}
+
+@mixin set-row-space($value) {
+	--row-space: #{$value};
+	& > * {
+		--parent-row-space: #{$value};
+	}
+}
+
+@mixin set-column-space($value) {
+	--column-space: #{$value};
+	& > * {
+		--parent-column-space: #{$value};
+	}
+}
+
+@mixin set-space-around($top: null, $right: null, $bottom: null, $left: null) {
+	@if $top {
+		--space-top: #{$top};
+	}
+	@if $right {
+		--space-right: #{$right};
+	}
+	@if $bottom {
+		--space-bottom: #{$bottom};
+	}
+	@if $left {
+		--space-left: #{$left};
+	}
+}
+
+@mixin margin {
+	margin: get-margin(top) get-margin(right) get-margin(bottom) get-margin(left);;
+}
+
+@mixin padding {
+	padding: get-padding(top) get-padding(right) get-padding(bottom) get-padding(left);
+}
+
+@mixin row {
+	display: flex;
+	flex-direction: row;
+}
+
+@mixin column {
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin row-space($value: null) {
+	& > * {
+		@include margin;
+	}
+	& > :not(:first-child) {
+		--margin-top: calc(#{resolve($value, var(--parent-row-space))} + var(--space-top));
+	}
+	& > :not(:last-child) {
+		--margin-bottom: var(--space-bottom);
+	}
+}
+
+@mixin column-space($value: null) {
+	& > * {
+		@include margin;
+	}
+	& > :not(:first-child) {
+		--margin-left: calc(#{resolve($value, var(--parent-column-space))} + var(--space-left));
+	}
+	& > :not(:last-child) {
+		--margin-right: var(--space-right);
+	}
+}
+
+@mixin flow-space($row-space: null, $column-space: null) {
+	@include margin;
+	flex-wrap: wrap;
+	--box-offset-bottom: calc(#{resolve($row-space, var(--row-space))} * -1);
+	--box-offset-right: calc(#{resolve($column-space, var(--column-space))} * -1);
+	& > * {
+		@include margin;
+		--margin-bottom: #{resolve($row-space, var(--parent-row-space))};
+		--margin-right: #{resolve($column-space, var(--parent-column-space))};
+	}
+}
+
+@mixin grow {
+	flex-grow: 1;
+	position: relative;
+}
+
+@mixin text {
+	line-height: calc(var(--line-space) + 1em);
+	&::before, &::after {
+		content: "";
+		display: block;
+	}
+	&::before {
+		margin-top: calc(var(--line-space) * -0.5 + var(--line-offset-top));
+	}
+	&::after {
+		margin-top: calc(var(--line-space) * -0.5 + var(--line-offset-bottom));
+	}
+}
+
+@mixin classes {
+	:root {
+		--line-space: 0.5em;
+		--line-offset-top: 0em;
+		--line-offset-bottom: 0em;
+	}
+
+	* {
+		// "margin" is set in direct descendant selectors
+		// to set visible space between or around elements.
+		--margin-top: 0px;
+		--margin-right: 0px;
+		--margin-bottom: 0px;
+		--margin-left: 0px;
+
+		// "box-offset" is set by an element to compensate offset
+		// of it's children so that there is no visual offset.
+		--box-offset-top: 0px;
+		--box-offset-right: 0px;
+		--box-offset-bottom: 0px;
+		--box-offset-left: 0px;
+
+		// "space" is set by an element to add individual space
+		// around the element based on it's type.
+		--space-top: 0px;
+		--space-right: 0px;
+		--space-bottom: 0px;
+		--space-left: 0px;
+
+		// "row/column-space" defines the space between rows/columns
+		// and is set on the container element. Elements that define
+		// this property must also set "parent-row/column-space" for
+		// all children using a direct descendant selector. This strict
+		// property separation is needed to support directly nested
+		// containers with different row/column spacing.
+		--row-space: 0px;
+		--column-space: 0px;
+		--parent-row-space: 0px;
+		--parent-column-space: 0px;
+
+		// "padding" is set by elements themselves to define the
+		// space between the content and the outer visual border.
+		--padding-top: 0px;
+		--padding-right: 0px;
+		--padding-bottom: 0px;
+		--padding-left: 0px;
+
+		// "border-width" must be the same as the actual border width
+		// and is substracted from the applied padding.
+		--border-width-top: 0px;
+		--border-width-right: 0px;
+		--border-width-bottom: 0px;
+		--border-width-left: 0px;
+	}
+
+	.margin {
+		@include margin;
+	}
+
+	.padding {
+		@include padding;
+	}
+
+	.row {
+		@include row;
+	}
+
+	.column {
+		@include column;
+	}
+
+	.row-space {
+		@include row-space;
+	}
+
+	.column-space {
+		@include column-space;
+	}
+
+	.flow-space {
+		@include flow-space;
+	}
+
+	.grow {
+		@include grow;
+	}
+
+	.text {
+		@include text;
+	}
+}

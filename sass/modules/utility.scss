@@ -1,0 +1,8 @@
+
+@function resolve($values...) {
+	@each $value in $values {
+		@if $value {
+			@return $value;
+		}
+	}
+}
