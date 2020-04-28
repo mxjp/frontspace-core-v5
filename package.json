@@ -1,10 +1,11 @@
 {
 	"name": "frontspace",
 	"main": "css/default.css",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"scripts": {
 		"compile": "node compile --style=compressed",
-		"start": "node compile --watch"
+		"start": "node compile --watch",
+		"prepack": "npm run compile"
 	},
 	"devDependencies": {
 		"sass": "^1.26.5"
