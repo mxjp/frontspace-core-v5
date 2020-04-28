@@ -1,11 +1,18 @@
 @use "utility" as *;
 
-@function get-margin($side) {
-	@return calc(var(--margin-#{$side}) + var(--box-offset-#{$side}));
-}
-
 @function get-padding($side) {
 	@return calc(var(--padding-#{$side}) + var(--border-width-#{$side}));
+}
+
+@mixin set-padding($top, $right: $top, $bottom: $top, $left: $right) {
+	--padding-top: #{$top};
+	--padding-right: #{$right};
+	--padding-bottom: #{$bottom};
+	--padding-left: #{$left};
+}
+
+@function get-margin($side) {
+	@return calc(var(--margin-#{$side}) + var(--box-offset-#{$side}));
 }
 
 @mixin set-row-space($value) {
