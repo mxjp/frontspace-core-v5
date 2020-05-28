@@ -1,7 +1,7 @@
 @use "utility" as *;
 
 @function get-padding($side) {
-	@return calc(var(--padding-#{$side}) + var(--border-width-#{$side}));
+	@return calc(var(--padding-#{$side}) - var(--border-width-#{$side}));
 }
 
 @mixin set-padding($top, $right: $top, $bottom: $top, $left: $right) {
