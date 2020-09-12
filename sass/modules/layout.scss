@@ -1,7 +1,7 @@
 @use "utility" as *;
 
 @function get-padding($side) {
-	@return calc(var(--padding-#{$side}) + var(--border-width-#{$side}));
+	@return calc(var(--padding-#{$side}) - var(--border-width-#{$side}));
 }
 
 @mixin set-padding($top, $right: $top, $bottom: $top, $left: $right) {
@@ -117,7 +117,7 @@
 	}
 }
 
-@mixin classes {
+@mixin props {
 	:root {
 		--line-space: 0.5em;
 		--line-offset-top: 0em;
@@ -171,7 +171,9 @@
 		--border-width-bottom: 0px;
 		--border-width-left: 0px;
 	}
+}
 
+@mixin classes {
 	.margin {
 		@include margin;
 	}
