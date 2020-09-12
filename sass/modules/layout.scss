@@ -11,9 +11,28 @@
 	--padding-left: #{$left};
 }
 
+@mixin define-padding($name, $top, $right: $top, $bottom: $top, $left: $right) {
+	--d-#{$name}-padding-top: #{$top};
+	--d-#{$name}-padding-right: #{$right};
+	--d-#{$name}-padding-bottom: #{$bottom};
+	--d-#{$name}-padding-left: #{$left};
+}
+
+@mixin use-padding($name) {
+	@include set-padding(
+		var(--d-#{$name}-padding-top),
+		var(--d-#{$name}-padding-right),
+		var(--d-#{$name}-padding-bottom),
+		var(--d-#{$name}-padding-left));
+}
+
+
+
 @function get-margin($side) {
 	@return calc(var(--margin-#{$side}) + var(--box-offset-#{$side}));
 }
+
+
 
 @mixin set-row-space($value) {
 	--row-space: #{$value};
@@ -22,12 +41,32 @@
 	}
 }
 
+@mixin define-row-space($name, $value) {
+	--d-#{$name}-row-space: #{$value};
+}
+
+@mixin use-row-space($name) {
+	@include set-row-space(var(--d-#{$name}-row-space));
+}
+
+
+
 @mixin set-column-space($value) {
 	--column-space: #{$value};
 	& > * {
 		--parent-column-space: #{$value};
 	}
 }
+
+@mixin define-column-space($name, $value) {
+	--d-#{$name}-column-space: #{$value};
+}
+
+@mixin use-column-space($name) {
+	@include set-column-space(var(--d-#{$name}-column-space));
+}
+
+
 
 @mixin set-space-around($top: null, $right: null, $bottom: null, $left: null) {
 	@if $top {
@@ -43,6 +82,52 @@
 		--space-left: #{$left};
 	}
 }
+
+@mixin define-space-around($name, $top: null, $right: null, $bottom: null, $left: null) {
+	@if $top {
+		--d-#{$name}-space-top: #{$top};
+	}
+	@if $right {
+		--d-#{$name}-space-right: #{$right};
+	}
+	@if $bottom {
+		--d-#{$name}-space-bottom: #{$bottom};
+	}
+	@if $left {
+		--d-#{$name}-space-left: #{$left};
+	}
+}
+
+@mixin use-space-around($name, $top: true, $right: true, $bottom: true, $left: true) {
+	@include set-space-around(
+		$top: if($top, var(--d-#{$name}-space-top, 0px), null),
+		$right: if($right, var(--d-#{$name}-space-right, 0px), null),
+		$bottom: if($bottom, var(--d-#{$name}-space-bottom, 0px), null),
+		$left: if($left, var(--d-#{$name}-space-left, 0px), null)
+	);
+}
+
+
+
+@mixin set-line-layout($space: 0.5em, $offset-top: 0em, $offset-bottom: 0em) {
+	--line-space: #{$space};
+	--line-offset-top: #{$offset-top};
+	--line-offset-bottom: #{$offset-bottom};
+}
+
+@mixin define-line-layout($name, $space: 0.5em, $offset-top: 0em, $offset-bottom: 0em) {
+	--d-#{$name}-line-space: #{$space};
+	--d-#{$name}-line-offset-top: #{$offset-top};
+	--d-#{$name}-line-offset-bottom: #{$offset-bottom};
+}
+
+@mixin use-line-layout($name) {
+	--line-space: var(--d-#{$name}-line-space);
+	--line-offset-top: var(--d-#{$name}-line-offset-top);
+	--line-offset-bottom: var(--d-#{$name}--line-offset-bottom);
+}
+
+
 
 @mixin margin {
 	margin: get-margin(top) get-margin(right) get-margin(bottom) get-margin(left);;
@@ -130,7 +215,7 @@
 
 @mixin props {
 	:root {
-		--line-space: 0.5em;
+		--line-space: 0em;
 		--line-offset-top: 0em;
 		--line-offset-bottom: 0em;
 	}
