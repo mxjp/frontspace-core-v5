@@ -1,4 +1,5 @@
 @use "modules/layout";
 
+@include layout.normalize;
 @include layout.props;
 @include layout.classes;

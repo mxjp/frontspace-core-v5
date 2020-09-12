@@ -117,6 +117,17 @@
 	}
 }
 
+@mixin normalize {
+	:root {
+		line-height: 1;
+	}
+
+	* {
+		box-sizing: border-box;
+		vertical-align: top;
+	}
+}
+
 @mixin props {
 	:root {
 		--line-space: 0.5em;
