@@ -26,6 +26,13 @@
 		var(--d-#{$name}-padding-left));
 }
 
+@mixin set-border-width($top, $right: $top, $bottom: $top, $left: $right) {
+	--border-width-top: #{$top};
+	--border-width-right: #{$right};
+	--border-width-bottom: #{$bottom};
+	--border-width-left: #{$left};
+}
+
 
 
 @function get-margin($side) {
