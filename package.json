@@ -1,7 +1,7 @@
 {
-	"name": "frontspace",
+	"name": "@frontspace/core",
 	"main": "css/default.css",
-	"version": "3.2.0",
+	"version": "4.0.0",
 	"scripts": {
 		"compile": "node compile --style=compressed",
 		"start": "node compile --watch",
