@@ -5,14 +5,14 @@ Frontspace is a modern minimal css framework that aims to provide an extensible 
 You can install the default build of frontspace using unpkg:<br>
 This includes all the normalization, properties and classes from all modules documented below.
 ```html
-<link rel="stylesheet" href="https://unpkg.com/frontspace">
+<link rel="stylesheet" href="https://unpkg.com/@frontspace/core">
 ```
 Or use the npm package and build your custom version using [sass](https://sass-lang.com/):
 ```shell
 npm i -D frontspace
 ```
 ```scss
-@use "~frontspace/sass/modules/...";
+@use "~@frontspace/core/sass/modules/...";
 ```
 
 <br>
@@ -21,7 +21,7 @@ npm i -D frontspace
 
 # Layout
 ```scss
-@use "~frontspace/sass/modules/layout";
+@use "~@frontspace/core/sass/modules/layout";
 ```
 
 ## Padding
@@ -226,5 +226,5 @@ The default build includes the following things
 ```
 and is available in the npm package under `/css/default.css` or via unpkg:
 ```html
-<link rel="stylesheet" href="https://unpkg.com/frontspace">
+<link rel="stylesheet" href="https://unpkg.com/@frontspace/core">
 ```
