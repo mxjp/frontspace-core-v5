@@ -190,11 +190,6 @@
 	}
 }
 
-@mixin grow {
-	flex-grow: 1;
-	position: relative;
-}
-
 @mixin text {
 	line-height: calc(var(--line-space) + 1em);
 	&::before, &::after {
@@ -303,10 +298,6 @@
 
 	.flow-space {
 		@include flow-space;
-	}
-
-	.grow {
-		@include grow;
 	}
 
 	.text {
