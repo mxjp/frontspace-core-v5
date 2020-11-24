@@ -122,6 +122,22 @@ If you want to allow elements in a flex box to wrap, you can use `flow-space` to
 </div>
 ```
 
+### Flexible Space
+To add a placeholder between elements in containers that use _flow, row or column space_, you can use `flex-space`.<br>
+The `flex-grow` property should only be manually used when the element that it is used on is meant to be visible in any way.
+```scss
+.placeholder {
+    @include layout.flex-space;
+}
+```
+```html
+<div class="some-row">
+    <div>Left</div>
+    <div class="placeholder" />
+    <div>Right</div>
+</div>
+```
+
 ### Individual Space
 For special elements like headings, you want to specify individual space that is automatically applied if they are used directly inside a container that uses `row/column-space`. Individual space is not applied if no element is on that side of an element.
 ```scss
