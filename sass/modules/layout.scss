@@ -159,10 +159,10 @@
 		@include margin;
 	}
 	& > :not(:first-child) {
-		--margin-top: calc(#{resolve($value, var(--parent-row-space))} + var(--space-top));
+		--margin-left: calc(#{resolve($value, var(--parent-row-space))} + var(--space-left));
 	}
 	& > :not(:last-child) {
-		--margin-bottom: var(--space-bottom);
+		--margin-right: var(--space-right);
 	}
 }
 
@@ -171,22 +171,22 @@
 		@include margin;
 	}
 	& > :not(:first-child) {
-		--margin-left: calc(#{resolve($value, var(--parent-column-space))} + var(--space-left));
+		--margin-top: calc(#{resolve($value, var(--parent-column-space))} + var(--space-top));
 	}
 	& > :not(:last-child) {
-		--margin-right: var(--space-right);
+		--margin-bottom: var(--space-bottom);
 	}
 }
 
 @mixin flow-space($row-space: null, $column-space: null) {
 	@include margin;
 	flex-wrap: wrap;
-	--box-offset-bottom: calc(#{resolve($row-space, var(--row-space))} * -1);
-	--box-offset-right: calc(#{resolve($column-space, var(--column-space))} * -1);
+	--box-offset-bottom: calc(#{resolve($column-space, var(--column-space))} * -1);
+	--box-offset-right: calc(#{resolve($row-space, var(--row-space))} * -1);
 	& > * {
 		@include margin;
-		--margin-bottom: #{resolve($row-space, var(--parent-row-space))};
-		--margin-right: #{resolve($column-space, var(--parent-column-space))};
+		--margin-bottom: #{resolve($column-space, var(--parent-column-space))};
+		--margin-right: #{resolve($row-space, var(--parent-row-space))};
 	}
 }
 
