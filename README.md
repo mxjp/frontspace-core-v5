@@ -171,7 +171,7 @@ h1 {
 ```
 
 ### Line Layout
-Displaying a text block beside something else that should be vertically aligned can be a pain as the line height of text adds small spacing to the top and bottom of any text. To avoid all of these problems frontspace provides a special container for all text fragments or other inline elements:
+Displaying a text block beside something else that should be vertically aligned can be a pain as the line height of text adds small spacing to the top and bottom of any text. To avoid all of these problems frontspace provides a special container for all text fragments or other inline elements.
 ```scss
 :root {
     // Line layout properties are inherited, so you can set the
@@ -193,6 +193,14 @@ p {
 code {
     @include layout.text;
     @include layout.use-line-layout(code);
+}
+```
+To apply line layout, frontspace uses pseudo elements with negative margins. However in the case of native inputs or other elements where pseudo elements can not be used, there is an alternative that subtracts space that is produced by text from existing padding:
+```scss
+input[type=text],
+textarea {
+    @include layout.padding;
+    @include layout.text-native;
 }
 ```
 

@@ -1,6 +1,9 @@
 @use "utility" as *;
 
 @function get-padding($side) {
+	@if $side == "top" or $side == "bottom" {
+		@return calc(var(--padding-#{$side}) - var(--border-width-#{$side}) + var(--native-line-offset-#{$side}));
+	}
 	@return calc(var(--padding-#{$side}) - var(--border-width-#{$side}));
 }
 
@@ -202,11 +205,17 @@
 		display: block;
 	}
 	&::before {
-		margin-top: calc(var(--line-space) * -0.5 + var(--line-offset-top));
+		margin-top: calc(var(--line-space) / -2 + var(--line-offset-top));
 	}
 	&::after {
-		margin-top: calc(var(--line-space) * -0.5 + var(--line-offset-bottom));
+		margin-top: calc(var(--line-space) / -2 + var(--line-offset-bottom));
 	}
+}
+
+@mixin text-native {
+	line-height: calc(var(--line-space) + 1em);
+	--native-line-offset-top: calc(var(--line-space) / -2 + var(--line-offset-top));
+	--native-line-offset-bottom: calc(var(--line-space) / -2 + var(--line-offset-bottom));
 }
 
 @mixin normalize {
@@ -273,6 +282,11 @@
 		--border-width-right: 0px;
 		--border-width-bottom: 0px;
 		--border-width-left: 0px;
+
+		// "native-line-offset" is added to padding to apply line layout
+		// to elements like <input> or <textareas>.
+		--native-line-offset-top: 0px;
+		--native-line-offset-bottom: 0px;
 	}
 }
 
@@ -311,5 +325,9 @@
 
 	.text {
 		@include text;
+	}
+
+	.text-native {
+		@include text-native;
 	}
 }
