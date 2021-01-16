@@ -232,6 +232,7 @@ Adds the following classes that correspond to the mixins with the same name:
 + `.column-space`
 + `.flow-space`
 + `.text`
++ `.text-native`
 
 ```scss
 @include layout.classes;
