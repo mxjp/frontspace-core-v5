@@ -184,12 +184,12 @@
 @mixin flow-space($row-space: null, $column-space: null) {
 	@include margin;
 	flex-wrap: wrap;
-	--box-offset-bottom: calc(#{resolve($column-space, var(--column-space))} * -1);
-	--box-offset-right: calc(#{resolve($row-space, var(--row-space))} * -1);
+	--box-offset-top: calc(#{resolve($column-space, var(--column-space))} * -1);
+	--box-offset-left: calc(#{resolve($row-space, var(--row-space))} * -1);
 	& > * {
 		@include margin;
-		--margin-bottom: #{resolve($column-space, var(--parent-column-space))};
-		--margin-right: #{resolve($row-space, var(--parent-row-space))};
+		--margin-top: #{resolve($column-space, var(--parent-column-space))};
+		--margin-left: #{resolve($row-space, var(--parent-row-space))};
 	}
 }
 
